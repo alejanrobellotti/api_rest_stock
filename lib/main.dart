@@ -1,12 +1,26 @@
-import 'package:api_rest_stock/setting/app_theme.dart';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
+
+
+import 'package:api_rest_stock/setting/app_theme.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(MainApp());
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+class MainApp extends StatefulWidget {
+
+  MainApp({super.key});
+
+  @override
+  State<MainApp> createState() => _MainAppState();
+}
+
+class _MainAppState extends State<MainApp> {
+  List<dynamic> producto = [];
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +37,13 @@ class MainApp extends StatelessWidget {
     );
   }
 
-  void fetchStock(){
+  void fetchStock() async{
     print('fetchStock solicitado');
+    const url = 'https://script.google.com/macros/s/AKfycbwWIUx1QOCpXbDIczCZFF6r4RLNq0VATBx7S5wXjIHh-JIkkJlTXwyd1Cb88Hpoq-4-6Q/exec';
+    final uri = Uri.parse(url);
+    final response = await http.get(uri);
+    final body = response.body;
+    final json =jsonDecode(body);
+
   }
 }
