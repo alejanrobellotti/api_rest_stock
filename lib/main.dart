@@ -44,6 +44,9 @@ class _MainAppState extends State<MainApp> {
     final response = await http.get(uri);
     final body = response.body;
     final json =jsonDecode(body);
-
+    setState(() {
+      producto = json['output'];
+    });
+    print('fetchStock completo');
   }
 }
